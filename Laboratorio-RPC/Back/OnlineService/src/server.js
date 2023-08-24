@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import grpc from '@grpc/grpc-js';
 import protoLoader from '@grpc/proto-loader';
-
+//apigateway
 dotenv.config()
 
 const PROTO_PATH = process.env.PROTO_PATH;

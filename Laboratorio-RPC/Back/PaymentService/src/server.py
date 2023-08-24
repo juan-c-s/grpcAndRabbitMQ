@@ -1,11 +1,11 @@
-
+#servicio 1 api
 from concurrent import futures
 
 import grpc
 import Service_pb2
 import Service_pb2_grpc
 
-HOST = '[::]:8080'
+HOST = '[::]:50051'
 
 class ProductService(Service_pb2_grpc.ProductServiceServicer):
    

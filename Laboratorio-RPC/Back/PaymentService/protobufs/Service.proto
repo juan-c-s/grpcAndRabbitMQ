@@ -11,3 +11,4 @@ message TransactionResponse{
 service ProductService{
     rpc AddProduct(Product) returns (TransactionResponse) {}
 }
+
