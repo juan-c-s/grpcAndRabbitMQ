@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+message Files{
+    repeated string fileNames = 1;
+}
+
+message TransactionResponse{
+    int32 status_code = 1;
+}
+message File{
+    string fileName = 1;
+}
+message Empty{}
+
+service FileManager{
+    rpc listFiles(Empty) returns (Files) {}
+    rpc findFile(File) returns (File) {}
+}
