@@ -1,4 +1,5 @@
 const amqp = require('amqplib');
+const {getFiles,getFile} = require('../utils')
 
 async function consumeMessages() {
   const connection = await amqp.connect('amqp://user:password@54.165.48.15:5672');
@@ -13,6 +14,15 @@ async function consumeMessages() {
     queue,
     (msg) => {
       if (msg.content) {
+        const data = msg.content.toString();
+        const obj = JSON.parse(data);
+
+        const path = "../files"
+        if(obj.method == "listFiles"){
+          console.log(getFiles(path));
+        }else{
+          console.log(getFile(path,obj.fileName))
+        }
         console.log(`${msg.content.toString()} is received`);
       }
     },
