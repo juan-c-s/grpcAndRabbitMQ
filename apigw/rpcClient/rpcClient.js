@@ -2,7 +2,7 @@ const grpc =require( '@grpc/grpc-js');
 const protoLoader =require( '@grpc/proto-loader');
 //apigateway
 require('dotenv').config();
-
+const {publishMessage}=require('../momClient/producer')
 
 const {PROTO_PATH,REMOTE_HOST} = process.env
 
@@ -26,24 +26,43 @@ const fileManager = grpc.loadPackageDefinition(packageDefinition).FileManager;
   console.log("corriendo main")
   client.findFile({fileName}, (err, data) => {
     if(err){
-      throw(err)
+      console.log("Error Found: ",err);
+      console.log("running mom");
+      console.log("<=============>");
+      const obj = {
+          method : "findFile",
+          fileName: fileName
+      }
+      publishMessage(JSON.stringify(obj))
     } else {
       console.log('Response received from remote service:', data); // API response
     }
   }); 
 }
 
- const listFiles = ()=>{
+ const listFiles =  ()=>{
   const client = new fileManager(REMOTE_HOST,grpc.credentials.createInsecure());
 
   console.log("corriendo main")
-  client.listFiles({}, (err, data) => {
-    if(err){
-      throw(err)
-    } else {
-      console.log('Response received from remote service:', data); // API response
-    }
-  }); 
+  try{
+    client.listFiles({}, (err, data) => {
+      if(err){
+        console.log("Error Found: ",err);
+        console.log("running mom");
+        console.log("<=============>");
+        const obj = {
+            method : "listFiles"
+        }
+         publishMessage(JSON.stringify(obj))
+      } else {
+
+        console.log('Response received from remote service:', data); // API response
+      }
+    }); 
+  }catch(e){
+    console.log("sizsas");
+    // throw e
+  }
 }
 
 

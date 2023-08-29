@@ -12,12 +12,7 @@ app.get('/listFiles', async (req, res) => {
     try{
         listFiles();
     }catch(e){
-        console.log("running Mom");
-        const obj = {
-            method : "listFiles"
-        }
-        await publishMessage(JSON.stringify(obj))
-        console.log("Error Found: ",e);
+       console.error(e)
     }
   res.status(201).send('success');
 });
@@ -44,14 +39,7 @@ app.post('/findFile', async (req, res) => {
     try{
         findFile(body.fileName);
     }catch(e){
-        console.log("running mom")
-        console.log("Error Found: ",e);
-        const obj = {
-            method : "findFile",
-            fileName : body.filename
-        }
-        await publishMessage(JSON.stringify(obj))
-
+        console.log(e)
     }
   res.status(201).send('success');
 });
