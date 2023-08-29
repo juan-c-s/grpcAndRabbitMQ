@@ -16,7 +16,7 @@ async function consumeMessages() {
       if (msg.content) {
         const data = msg.content.toString();
         const obj = JSON.parse(data);
-
+        console.log(obj);
         const path = "../files"
         if(obj.method == "listFiles"){
           console.log(getFiles(path));
