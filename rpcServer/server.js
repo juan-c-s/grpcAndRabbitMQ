@@ -25,7 +25,7 @@ async function getServer() {
     findFile,
     listFiles,
   });
-  server.bindAsync('localhost:50051', grpc.ServerCredentials.createInsecure(), () => {
+  server.bindAsync('54.208.65.91:50051', grpc.ServerCredentials.createInsecure(), () => {
     server.start();
   });
 }
