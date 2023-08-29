@@ -26,7 +26,7 @@ const fileManager = grpc.loadPackageDefinition(packageDefinition).FileManager;
   console.log("corriendo main")
   client.findFile({fileName}, (err, data) => {
     if(err){
-      console.log(err);
+      throw(err)
     } else {
       console.log('Response received from remote service:', data); // API response
     }
@@ -39,7 +39,7 @@ const fileManager = grpc.loadPackageDefinition(packageDefinition).FileManager;
   console.log("corriendo main")
   client.listFiles({}, (err, data) => {
     if(err){
-      console.log(err);
+      throw(err)
     } else {
       console.log('Response received from remote service:', data); // API response
     }

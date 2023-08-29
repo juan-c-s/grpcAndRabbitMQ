@@ -12,6 +12,7 @@ app.get('/listFiles', async (req, res) => {
     try{
         listFiles();
     }catch(e){
+        console.log("running Mom");
         const obj = {
             method : "listFiles"
         }
@@ -43,6 +44,7 @@ app.post('/findFile', async (req, res) => {
     try{
         findFile(body.fileName);
     }catch(e){
+        console.log("running mom")
         console.log("Error Found: ",e);
         const obj = {
             method : "findFile",
