@@ -31,7 +31,7 @@ Protobufs: Se utilizó unicamente para el desarrollo de las interfaces para la c
 ExpressJS: Correr un servidor simple
 amqplib:  nos permitió generar el producer y el consumer.
 grpc: Una alternativa a JSON para la comunicación con otros servicios vía internet. Es una herramienta muy poderosa ya que funciona con buffers entonces es más rápido que JSON que es con strings.
-fs: Utilizamos esta librería para interactuar con el filesystem, ya que los servicios implementados necesitaban accesder a carpetas.
+fs: Utilizamos esta librería para interactuar con el filesystem, ya que los servicios implementados necesitaban acceder a la carpeta files.
 
 En las 3 instancias, se debe correr estas líneas
 $ sudo curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash - && sudo apt-get install -y nodejs
