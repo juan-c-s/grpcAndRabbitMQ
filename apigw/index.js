@@ -26,23 +26,53 @@ app.get('/listFiles', async (req, res) => {
             method : "listFiles"
         }
         await publishMessage(JSON.stringify(obj))
+
     }catch(e){
+        const obj = {
+            method : "listFiles"
+        }
+        await publishMessage(JSON.stringify(obj))
         console.log("Error Found: ",e);
     }
   res.status(201).send('success');
 });
 
+// app.post('/findFile', async (req, res) => {
+//     const body = req.body;
+//     console.log(body.fileName);
+//     try{
+//         findFile(body.fileName);
+//     }catch(e){
+//         console.log("Error Found: ",e);
+//         const obj = {
+//             method : "findFile",
+//             fileName : body.filename
+//         }
+//         await publishMessage(JSON.stringify(obj))
+
+//     }
+//   res.status(201).send('success');
+// });
 app.post('/findFile', async (req, res) => {
     const body = req.body;
-    console.log(body.fileName);
+    console.log( body.fileName);
     try{
-        findFile(body.fileName);
+
+        const obj = {
+            method : "findFile",
+            fileName : body.fileName
+        }
+        console.log(obj);
+        console.log(JSON.stringify(obj));
+        await publishMessage(JSON.stringify(obj))
+
     }catch(e){
         console.log("Error Found: ",e);
         const obj = {
-            method : "listFiles",
+            method : "findFile",
             fileName : body.filename
         }
+       
         await publishMessage(JSON.stringify(obj))
 
     }

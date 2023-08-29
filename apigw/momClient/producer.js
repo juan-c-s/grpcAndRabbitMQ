@@ -13,7 +13,7 @@ async function publishMessage(message) {
       
         setTimeout(() => {
           connection.close();
-          process.exit(0);
+        //   process.exit(0);
         }, 500); // Allow some time for the message to be sent before closing the connection
     }
     catch(e){
@@ -22,7 +22,6 @@ async function publishMessage(message) {
     }
 }
 
-// publishMessage("{method:listFiles}")
 module.exports={
     publishMessage
 }
