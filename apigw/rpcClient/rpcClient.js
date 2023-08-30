@@ -20,7 +20,7 @@ console.info("grpc Producer service is started...");
 const fileManager = grpc.loadPackageDefinition(packageDefinition).FileManager;
 
 
- const findFile = (fileName)=>{
+ const findFile = (fileName,email)=>{
   const client = new fileManager(REMOTE_HOST,grpc.credentials.createInsecure());
 
   console.log("corriendo main")
@@ -31,7 +31,8 @@ const fileManager = grpc.loadPackageDefinition(packageDefinition).FileManager;
       console.log("<=============>");
       const obj = {
           method : "findFile",
-          fileName: fileName
+          fileName: fileName,
+          email,
       }
       publishMessage(JSON.stringify(obj))
     } else {
@@ -40,7 +41,7 @@ const fileManager = grpc.loadPackageDefinition(packageDefinition).FileManager;
   }); 
 }
 
- const listFiles =  ()=>{
+ const listFiles =  (email)=>{
   const client = new fileManager(REMOTE_HOST,grpc.credentials.createInsecure());
 
   console.log("corriendo main")
@@ -51,7 +52,8 @@ const fileManager = grpc.loadPackageDefinition(packageDefinition).FileManager;
         console.log("running mom");
         console.log("<=============>");
         const obj = {
-            method : "listFiles"
+            method : "listFiles",
+            email
         }
          publishMessage(JSON.stringify(obj))
       } else {

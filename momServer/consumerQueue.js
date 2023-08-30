@@ -1,8 +1,12 @@
 const amqp = require('amqplib');
+const sendMessage = require('./sendMessage.js')
 const {getFiles,getFile} = require('../utils')
 
+require( 'dotenv').config();
+const {REMOTE_HOST} = process.env
+
 async function consumeMessages() {
-  const connection = await amqp.connect('amqp://user:password@54.165.48.15:5672');
+  const connection = await amqp.connect(`amqp://user:password@${REMOTE_HOST}:5672`);
   const channel = await connection.createChannel();
 
   const queue = 'my_app';
@@ -19,15 +23,19 @@ async function consumeMessages() {
         console.log(obj);
         const path = "../files"
         if(obj.method == "listFiles"){
-          console.log(getFiles(path));
+          const response = getFiles(path);
+          sendMessage(response,obj.email)
+          console.log(response);
         }else{
-          console.log(getFile(path,obj.fileName))
+          const response = getFile(path,obj.fileName);
+          sendMessage(response,obj.email)
+          console.log(response)
         }
         console.log(`${msg.content.toString()} is received`);
+        
       }
     },
     { noAck: true }
   );
 }
-
 consumeMessages().catch(console.error);
